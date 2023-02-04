@@ -1,0 +1,9 @@
+docker_image_name: ubuntu:20.04
+
+task:
+  name: Download and upload video
+  script:
+    - apt-get update && apt-get install -y python3-pip
+    - pip3 install google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client requests
+    - curl -o script.py https://example.com/script.py
+    - python3 script.py
