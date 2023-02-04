@@ -5,10 +5,8 @@ import requests
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
-
 # Replace with the URL for the client secrets file
 client_secrets_file_url = "https://github.com/rombuilder/Yt/blob/main/client_secret.json"
-
 # Download the client secrets file
 response = requests.get(client_secrets_file_url)
 if response.status_code != 200:
@@ -16,6 +14,8 @@ if response.status_code != 200:
 
 # Load the client secrets file into memory
 creds = Credentials.from_authorized_user_info(info=response.json())
+
+
 
 # Authenticate and build the YouTube API client
 youtube = build("youtube", "v3", credentials=creds)
