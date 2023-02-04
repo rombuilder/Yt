@@ -7,7 +7,7 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
 # Replace with the URL for the client secrets file
-client_secrets_file_url = "https://example.com/client_secrets.json"
+client_secrets_file_url = "https://github.com/rombuilder/Yt/blob/main/client_secret.json"
 
 # Download the client secrets file
 response = requests.get(client_secrets_file_url)
