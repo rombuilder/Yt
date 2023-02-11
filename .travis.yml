@@ -1,0 +1,48 @@
+dist: focal
+
+env:
+  global:
+    - secure: "<secure_key>"
+    - export DEBIAN_FRONTEND=noninteractive
+
+install:
+  - sudo apt update
+  - sudo apt install sudo
+  - sudo apt-get install -y --no-install-recommends tzdata
+  - sudo ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
+  - sudo apt-get install -y tzdata
+  - sudo dpkg-reconfigure --frontend noninteractive tzdata
+  - sudo apt update -y && sudo apt install git aria2 curl wget rsync zip unzip lzma cpio ccache clang -y
+  - sudo apt install python3 -y
+  - sudo ln -sf /usr/bin/python3 /usr/bin/python
+  - git config --global user.name "Sushrut1101"
+  - git config --global user.email "guptasushrut@gmail.com"
+
+before_script:
+  - df -h
+  - lsblk
+  - ls -l -a -h
+
+script:
+  - echo "============================"
+  - echo "Syncing The Sources..."
+  - echo "============================"
+  - sudo apt-get update 
+  - curl https://storage.googleapis.com/git-repo-downloads/repo > repo
+  - chmod a+x repo
+  - PATH=$PATH:$PWD
+  - export PATH
+  - $EXTRA_CMD
+
+  - export USE_CCACHE=1
+  - export CCACHE_EXEC=/usr/bin/ccache
+  - ccache -M 70G
+
+  - git clone https://github.com/TrebleDroid/treble_experimentations
+  - mkdir aosp13
+  - cd aosp13
+  - bash ../treble_experimentations/build.sh
+  - echo "============================"
+  - echo "Syncing Complete!"
+  - echo "============================"
+
